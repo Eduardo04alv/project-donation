@@ -1,12 +1,7 @@
 ﻿using Donation_Domain.entities;
 using Donation_Domain.Repository;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Donation_Infrastructure.Repository
 {
