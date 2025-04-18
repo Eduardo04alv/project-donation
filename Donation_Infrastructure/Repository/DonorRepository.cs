@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Donation_Infrastructure.Repository
 {
-    internal class DonorRepository : IDonorRepository
+    public class DonorRepository : IDonorRepository
     {
 
         private readonly string _connectionString;
@@ -29,8 +29,8 @@ namespace Donation_Infrastructure.Repository
                     {
                         var command = new SqlCommand(" insert into donor ( name_donor, email_donor , phone_donor )  values ( @name_donor, @email_donor , @phone_donor )", connection);
 
-                        command.Parameters.AddWithValue(" @name_donor", _donor.name_donor);
-                        command.Parameters.AddWithValue(" @email_donor", _donor.email_donor);
+                        command.Parameters.AddWithValue("@name_donor", _donor.name_donor);
+                        command.Parameters.AddWithValue("@email_donor", _donor.email_donor);
                         command.Parameters.AddWithValue("@phone_donor", _donor.phone_donor);
 
                         command.ExecuteNonQuery();

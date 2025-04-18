@@ -1,57 +1,113 @@
-﻿using Donation_application.Iservices;
-using Donation_Domain.entities;
+﻿using Donation_Domain.entities;
+using Donation_Infrastructure.Ddcontext;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace donation_api.Controllers
+namespace project_donation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DonorController : ControllerBase
+    public class DonorsController : ControllerBase
     {
-        private readonly IDonorService _donorService;
+        private readonly donorContext _Context;
 
-        public DonorController(IDonorService donorService)
+        public DonorsController(donorContext context)
         {
-            _donorService = donorService;
+            _Context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public ActionResult<IEnumerable<Donor>> GetDonors()
         {
-            var donors = await _donorService.GetAll();
+            var donors = _Context.donor.ToList();
             return Ok(donors);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public ActionResult<Donor> GetDonor(int id)
         {
-            var donor = await _donorService.GetById(id);
+            var donor = _Context.donor.Find(id);
+
             if (donor == null)
+            {
                 return NotFound();
+            }
 
             return Ok(donor);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Donor donor)
+        public ActionResult<Donor> CreateDonor(Donor model)
         {
-            await _donorService.Add(donor);
-            return Ok(new { message = "Donor created successfully" });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _Context.donor.Add(model);
+            _Context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetDonor), new { id = model.id_donor }, model);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Donor donor)
+        public IActionResult UpdateDonor(int id, Donor model)
         {
-            donor.id_donor = id;
-            await _donorService.Update(donor);
-            return Ok(new { message = "Donor updated successfully" });
+            if (id != model.id_donor)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var existingDonor = _Context.donor.Find(id);
+            if (existingDonor == null)
+            {
+                return NotFound();
+            }
+
+            _Context.Entry(existingDonor).CurrentValues.SetValues(model);
+
+            try
+            {
+                _Context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DonorExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult DeleteDonor(int id)
         {
-            await _donorService.Delete(id);
-            return Ok(new { message = "Donor deleted successfully" });
+            var donor = _Context.donor.Find(id);
+            if (donor == null)
+            {
+                return NotFound();
+            }
+
+            _Context.donor.Remove(donor);
+            _Context.SaveChanges();
+
+            return NoContent();
+        }
+
+        private bool DonorExists(int id)
+        {
+            return _Context.donor.Any(e => e.id_donor == id);
         }
     }
 }
