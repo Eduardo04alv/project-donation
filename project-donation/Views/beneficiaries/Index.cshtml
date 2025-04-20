@@ -1,0 +1,57 @@
+﻿@model List<Donation_Domain.entities.Beneficiarie>
+@{
+    ViewData["Title"] = "Beneficiaries";
+}
+
+<div class="container mt-5">
+    <h1 class="display-4 text-center mb-4">Lista de Beneficiarios</h1>
+
+    <a asp-controller="Beneficiaries" asp-action="Create" class="btn btn-primary mb-3">Nuevo Beneficiario</a>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Descripción</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id_Benefi</td>
+                        <td>@item.name_Benefi</td>
+                        <td>@item.phone_Benefi</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.website))
+                            {
+                                <a href="@item.website" target="_blank" rel="noopener noreferrer">@item.website</a>
+                            }
+                            else
+                            {
+                                <span>No disponible</span>
+                            }
+                        </td>
+                        <td>@item.description</td>
+                        <td>
+                            <a asp-controller="Beneficiaries" asp-action="Update" asp-route-id="@item.id_Benefi" class="btn btn-warning btn-sm">Update</a>
+                            <a asp-controller="Beneficiaries" asp-action="Delete" asp-route-id="@item.id_Benefi" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No se encontraron registros</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

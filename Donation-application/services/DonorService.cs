@@ -1,9 +1,10 @@
-﻿using Donation_Domain.entities;
+﻿using Donation_application.Iservices;
+using Donation_Domain.entities;
 using Donation_Domain.Repository;
 
 namespace Donation_application.services
 {
-    public class DonorService
+    public class DonorService : IDonorService
     {
         private readonly IDonorRepository _donorRepository;
 
@@ -36,9 +37,8 @@ namespace Donation_application.services
 
         public async Task Delete(int id)
         {
-            _donorRepository.Delete(id); 
+            _donorRepository.Delete(id);
             await Task.CompletedTask;
         }
-
     }
 }

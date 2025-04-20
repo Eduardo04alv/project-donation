@@ -1,5 +1,6 @@
 using Donation_Domain.Repository;
 using Donation_Infrastructure.Ddcontext;
+using Donation_Infrastructure.IRepository;
 using Donation_Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,10 @@ internal class Program
         builder.Services.AddDbContext<donorContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
         builder.Services.AddTransient<IDonorRepository, DonorRepository>();
+   
+        builder.Services.AddDbContext<BeneficiarieContext>(options =>
+           options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
+        builder.Services.AddTransient<IBeneficiarieRepository, BeneficiarieRepository>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

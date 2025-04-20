@@ -1,0 +1,39 @@
+﻿@model Donation_Domain.entities.Beneficiarie
+@{
+    ViewData["Title"] = "Add Beneficiary";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Add a New Beneficiary</h1>
+</div>
+
+<form asp-controller="Beneficiaries" asp-action="Create" method="post">
+    <div class="row col-md-12">
+
+        <div class="form-group col-md-4">
+            <label asp-for="name_Benefi"></label>
+            <input asp-for="name_Benefi" class="form-control" />
+            <span asp-validation-for="name_Benefi" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label asp-for="phone_Benefi"></label>
+            <input asp-for="phone_Benefi" type="tel" class="form-control" />
+            <span asp-validation-for="phone_Benefi" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label asp-for="website"></label>
+            <input asp-for="website" class="form-control" />
+            <span asp-validation-for="website" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label asp-for="description"></label>
+            <textarea asp-for="description" class="form-control"></textarea>
+            <span asp-validation-for="description" class="text-danger"></span>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+</form>
