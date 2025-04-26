@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Client Panel";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Your Client Panel!</h1>
+    <p>Here you can access the features available to clients.</p>
+    <hr class="my-4">
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Donor List</h5>
+                    <p class="card-text">Check the list of donors.</p>
+                    <a asp-controller="Userlist" asp-action="Donor" class="btn btn-secondary">View Donors</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Beneficiary List</h5>
+                    <p class="card-text">Check the list of beneficiaries.</p>
+                    <a asp-controller="Userlist" asp-action="Beneficiaries" class="btn btn-secondary">View Beneficiaries</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Donation List</h5>
+                    <p class="card-text">Check the history of all donations.</p>
+                    <a asp-controller="Userlist" asp-action="Donations" class="btn btn-secondary">View Donations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

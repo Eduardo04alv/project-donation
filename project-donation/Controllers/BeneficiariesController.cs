@@ -27,7 +27,7 @@ namespace project_donation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Beneficiarie model)
-        {
+                {
             _Context.beneficiarie.Add(model);
             _Context.SaveChanges();
             return RedirectToAction("Index");
@@ -55,8 +55,8 @@ namespace project_donation.Controllers
             if (ModelState.IsValid)
             {
                 _Context.beneficiarie.Update(model);
-                _Context.SaveChanges();
-                return RedirectToAction("Index");
+            _Context.SaveChanges();
+            return RedirectToAction("Index");
             }
 
             return View(model);

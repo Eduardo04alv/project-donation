@@ -1,0 +1,50 @@
+﻿@model Donation_Domain.entities.Usuario
+@{
+    ViewBag.Title = "Register";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4 fw-bold">Register New User</h2>
+
+                    <form asp-action="Registrar" method="post">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><label for="username" class="form-label">Username:</label></td>
+                                <td><input asp-for="username" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="pasword" class="form-label">Password:</label></td>
+                                <td><input asp-for="pasword" type="password" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="rol" class="form-label">Role:</label></td>
+                                <td>
+                                    <select asp-for="rol" class="form-select" required>
+                                        <option value="user">Client</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <button type="submit" class="btn btn-dark w-100 mt-3">Register</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <p class="text-center mt-3">
+                        <a href="/Home/Index">Back to Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

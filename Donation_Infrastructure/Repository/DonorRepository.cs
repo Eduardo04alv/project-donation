@@ -107,12 +107,11 @@ namespace Donation_Infrastructure.Repository
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("Update donor set id_donor = @id_donor, name_donor = @name_donor, email_donor = @email_donor,  phone_donor = @phone_donor  where id_donor = @id_donor ", connection);
-                command.Parameters.AddWithValue("@id_donor", _donor.id_donor);
-                command.Parameters.AddWithValue(" @name_donor", _donor.name_donor);
-                command.Parameters.AddWithValue(" @email_donor", _donor.email_donor);
+                var command = new SqlCommand("Update donor set name_donor = @name_donor, email_donor = @email_donor,  phone_donor = @phone_donor  where id_donor = @id_donor ", connection);
+                command.Parameters.AddWithValue("@name_donor", _donor.name_donor);
+                command.Parameters.AddWithValue("@email_donor", _donor.email_donor);
                 command.Parameters.AddWithValue("@phone_donor", _donor.phone_donor);
-
+              
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();

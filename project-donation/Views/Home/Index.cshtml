@@ -1,8 +1,53 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Donation_Domain.entities.Usuario
+@{
+    ViewData["Title"] = "Login";
 }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4 fw-bold">Login</h2>
+
+                    <form method="post" asp-action="Index">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><label for="username" class="form-label">Username:</label></td>
+                                <td><input type="text" name="username" id="username" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="pasword" class="form-label">Password:</label></td>
+                                <td><input type="password" name="pasword" id="pasword" class="form-control" required /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <button type="submit" class="btn btn-dark w-100 mt-3">Sign In</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <p class="text-danger text-center mt-2">@ViewBag.Error</p>
+                    }
+
+                    @if (ViewBag.Rol != null)
+                    {
+                        <p class="text-success text-center mt-2">Welcome! Your role is: @ViewBag.Rol</p>
+                    }
+                    else
+                    {
+                        <p class="text-center mt-3">
+                            Don't have an account? 
+                            <a asp-controller="usuario" asp-action="Registrar">Register here</a>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

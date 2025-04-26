@@ -1,0 +1,57 @@
+﻿@model List<project_donation.Models.donations.Donations>
+@{
+    ViewData["Title"] = "Donations";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 fw-bold">Donation List</h2>
+
+  
+
+    <table class="table table-hover table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Donor ID</th>
+                <th>Beneficiary ID</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Date</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.d_donation</td>
+                        <td>@item.id_donor</td>
+                        <td>@item.id_Benefi</td>
+                        <td>@item.amount</td>
+                        <td>@item.type_donation</td>
+                        <td>@item.date_donation</td>
+                      
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center">No records found</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="position-fixed top-0 end-0 p-3 z-3">
+    <div class="btn-group" role="group" aria-label="Admin Navigation">
+        <a asp-controller="Userlist" asp-action="Donor" class="btn btn-outline-primary">Donors</a>
+        <a asp-controller="Userlist" asp-action="Beneficiaries" class="btn btn-outline-success">Beneficiaries</a>
+        <a asp-controller="Userlist" asp-action="Donations" class="btn btn-outline-danger">Donations</a>
+    </div>
+</div>

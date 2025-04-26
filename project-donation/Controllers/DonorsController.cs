@@ -29,7 +29,7 @@ namespace project_donation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Donor model)
-        {
+                {
             //_DonationAdoService.Add(model);
             _Context.donor.Add(model);
             _Context.SaveChanges();
@@ -55,11 +55,11 @@ namespace project_donation.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+                {
                 _Context.donor.Update(model);
-                _Context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            _Context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
             return View(model);
         }
